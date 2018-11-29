@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/listStories.dart';
+import 'screens/list_stories.dart';
 
 class HackerNewsApp extends StatelessWidget {
   @override
