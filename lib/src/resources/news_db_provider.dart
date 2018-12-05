@@ -62,6 +62,8 @@ class NewsDbProvider implements Source, Cache {
     item.toMapForDb(),
     conflictAlgorithm: ConflictAlgorithm.ignore
   );
+
+  Future<int> clear() => db.delete('items');
 }
 
 final NewsDbProvider newsDbProvider = NewsDbProvider();
