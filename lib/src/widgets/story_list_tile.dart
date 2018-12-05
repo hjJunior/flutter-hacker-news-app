@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/item_model.dart';
 import '../blocs/stories_provider.dart';
 import '../blocs/stories_bloc.dart';
+import 'loading_container.dart';
 
 class StoryListTile extends StatelessWidget {
   final int itemId;
@@ -15,18 +16,36 @@ class StoryListTile extends StatelessWidget {
       stream: bloc.items,
       builder: (context, snap) {
         if (!snap.hasData) {
-          return Text('Stream still loading');
+          return LoadingContainer();
         }
         return FutureBuilder<ItemModel>(
           future: snap.data[itemId],
           builder: (context, itemSnap) {
             if (!itemSnap.hasData) {
-              return Text('Still loading item $itemId}');
+              return LoadingContainer();
             }
-            return Text(itemSnap.data.title);
+            return _buildTile(itemSnap.data);
           },
         );
       },
     );
   }
+
+  Widget _buildTile(ItemModel item) => Column(
+    children: <Widget>[
+      ListTile(
+        title: Text(item.title),
+        subtitle: Text("${item.score} votes"),
+        trailing: Column(
+          children: <Widget>[
+            Icon(Icons.comment),
+            Text("${item.descendants}")
+          ],
+        ),
+      ),
+      Divider(
+        height: 8.0,
+      )
+    ],
+  );
 }
