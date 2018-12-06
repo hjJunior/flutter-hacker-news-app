@@ -24,16 +24,19 @@ class StoryListTile extends StatelessWidget {
             if (!itemSnap.hasData) {
               return LoadingContainer();
             }
-            return _buildTile(itemSnap.data);
+            return _buildTile(itemSnap.data, context);
           },
         );
       },
     );
   }
 
-  Widget _buildTile(ItemModel item) => Column(
+  Widget _buildTile(ItemModel item, BuildContext context) => Column(
     children: <Widget>[
       ListTile(
+        onTap: () {
+          Navigator.pushNamed(context, '/$itemId');
+        },
         title: Text(item.title),
         subtitle: Text("${item.score} votes"),
         trailing: Column(
