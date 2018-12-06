@@ -32,7 +32,7 @@ class HackerNewsApp extends StatelessWidget {
         builder: (context) {
           final int storyId = int.parse(settings.name.replaceFirst('/', ''));
           CommentsProvider.of(context).fetchItemWithComments(storyId);
-          return StoryDetail(storyid: storyId,);
+          return StoryDetail(storyId: storyId,);
         }
     );
 
